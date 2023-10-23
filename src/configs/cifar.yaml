@@ -1,0 +1,94 @@
+directory: ""
+tensorboard:
+  directory: ! "statistics/"
+
+dataset:
+  directory: ! "/data/datasets"
+  name: "CIFAR10"
+  min: 0.0
+  max: 1.0
+
+nn:
+  classifier: ! "TEXP_VGG"
+  conv_layer_type: "implicitconv2d"
+  norm_layer_type: "texp"
+  norm_layer_tilt: [0.192]
+  threshold: 0.5
+  threshold_mean_plus_std: true
+  implicit_normalization: ! "l2"
+  normalize_input: false
+  num_texp_layers: 1
+  texp_count: 0
+  lr: 0.001
+  lr_min: 0.0
+  lr_max: 0.001
+  momentum: 0.9
+  weight_decay: 0.0
+  optimizer: "adam"
+  scheduler: "step"
+  model_path: "checkpoints/"
+  
+train:
+  type: "standard"
+  batch_size: 128
+  epochs: 100
+  regularizer:
+    active:
+      - tilt
+    tilt:
+      tilt: [10]
+      alpha: [0.001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+      layer: Conv2d
+    l1_weight:
+      scale: 0.001
+  adversarial:
+    attack: "PGD"
+    norm: "inf"
+    eps: 0.00784
+    alpha: 0.04
+    step_size: 0.002
+    num_steps: 10
+    random_start: true
+    num_restarts: 1
+    loss: "cross_entropy"
+  noise:
+    std: 0.1
+  sota_augs: "none" # Can be autoaug, randaug, augmix or none
+  
+  
+test:
+  batch_size: 100
+  use_autoattack: true
+  l2_eps: 0.25
+  linf_eps: 0.00784
+
+noisy:
+  num_experiments: 5
+  std: 0.1  
+
+
+attack:
+  norm: "inf"
+  epsilon: 0.00784313725
+  alpha: 0.04
+  step_size: 0.000784313725
+  num_steps: 30
+  random: false
+  num_restarts: 1
+  EOT_size: 1
+  loss: "cross_entropy"
+
+
+adap_thresh: true
+reg_relu_on: false
+reg_anti_hebbian: false
+texp_across_filts_only: true
+
+no_cuda: false
+seed: 2022
+log_interval: 10
+no_tensorboard: true
+save_model: false
+plot_stats: true
+verbose: true
+compute_activation_disparity: false

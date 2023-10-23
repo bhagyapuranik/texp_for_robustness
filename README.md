@@ -1,1 +1,1 @@
-# texp_for_robustness
+# TEXP approach for enhancing robustness of DNNs

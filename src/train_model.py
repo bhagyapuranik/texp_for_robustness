@@ -38,7 +38,7 @@ def main(cfg: DictConfig) -> None:
     torch.manual_seed(cfg.seed)
     torch.cuda.manual_seed(cfg.seed)
 
-    extra_tests_on = False # Set to true to perform the complete set of robustness evaluations reported in the paper.
+    extra_tests_on = False # Set to true to perform the complete set of robustness evaluations reported in the paper. Requires additional dependencies - robustbench and autoattack (see README.md)
 
     use_cuda = not cfg.no_cuda and torch.cuda.is_available()
     device = torch.device("cuda" if use_cuda else "cpu")

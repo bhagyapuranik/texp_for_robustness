@@ -30,7 +30,7 @@ All the hyperparameters and other settings are located inside the file src/confi
 
 ## Training
 
-The default parameters and settings to train a TEXP-VGG-16 model are loaded in src/sh/train.sh. To lauch the training, execute the following from the project directory. It also saves the checkpoint.
+The default parameters and settings to train a TEXP-VGG-16 model are loaded in src/sh/train.sh. To launch the training, execute the following from the project directory. It also saves the checkpoint.
 
 ```bash
 bash src/sh/train.sh
